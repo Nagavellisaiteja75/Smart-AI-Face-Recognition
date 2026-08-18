@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1020">
+    <title>SmartFace | Recognition made simple</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="SmartFace home">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span>Smart<span>Face</span></span>
+        </a>
+        <div class="system-status"><span></span> System ready</div>
+      </header>
+
+      <section class="hero" id="top">
+        <div>
+          <p class="eyebrow">Face recognition attendance</p>
+          <h1>Simple check-ins.<br><em>Clear confidence.</em></h1>
+          <p class="hero-copy">Register a person with a few clear photos, then verify attendance from your camera or an uploaded image.</p>
+        </div>
+        <div class="stat-card" aria-label="Registered people">
+          <span>Registered people</span>
+          <strong id="peopleCount">0</strong>
+          <small id="sampleCount">No samples yet</small>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Recognition workspace">
+        <section class="panel scanner-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Recognition</p>
+              <h2>Scan a face</h2>
+            </div>
+            <span class="pill" id="cameraStatus">Camera off</span>
+          </div>
+
+          <div class="camera-stage">
+            <video id="video" autoplay muted playsinline></video>
+            <div class="scanner-guide" aria-hidden="true"></div>
+            <div class="scanner-line" aria-hidden="true"></div>
+            <p id="cameraMessage">Turn on your camera or upload a photo to begin.</p>
+          </div>
+
+          <div class="actions">
+            <button id="cameraButton" class="button button-secondary" type="button">Enable camera</button>
+            <button id="scanButton" class="button button-primary" type="button" disabled>Scan identity <span aria-hidden="true">→</span></button>
+          </div>
+
+          <label class="upload-control" for="fileInput">
+            <span>Or upload an image</span>
+            <input id="fileInput" type="file" accept="image/*" hidden>
+          </label>
+        </section>
+
+        <section class="panel result-panel" aria-live="polite">
+          <p class="eyebrow">Latest result</p>
+          <div id="waitingState" class="empty-state">
+            <div class="empty-icon" aria-hidden="true">⌁</div>
+            <h2>Ready when you are</h2>
+            <p>Your recognition result appears here after a scan.</p>
+          </div>
+          <div id="resultState" class="result hidden">
+            <div id="initials" class="avatar">?</div>
+            <p id="resultLabel" class="result-label">Scan complete</p>
+            <h2 id="personName">No match</h2>
+            <p id="resultMessage" class="result-message"></p>
+            <div class="confidence-block">
+              <div><span>Confidence</span><strong id="confidenceText">—</strong></div>
+              <div class="progress"><span id="progressBar"></span></div>
+            </div>
+            <div class="result-meta">
+              <div><span>Faces found</span><b id="faceCount">0</b></div>
+              <div><span>Status</span><b id="statusText">Waiting</b></div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="lower-grid">
+        <section class="panel enroll-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Enrollment</p>
+              <h2>Add a person</h2>
+            </div>
+          </div>
+          <p class="panel-copy">Use 1–10 well-lit, front-facing photos. More varied samples improve recognition.</p>
+          <form id="enrollmentForm" class="enrollment-form">
+            <label>Name<input id="personNameInput" name="name" type="text" minlength="2" placeholder="e.g. Alex Johnson" required></label>
+            <label>Photos<input id="personImages" name="images" type="file" accept="image/*" multiple required></label>
+            <button id="enrollButton" class="button button-primary" type="submit">Add to recognition</button>
+          </form>
+          <p id="enrollmentMessage" class="form-message" role="status"></p>
+        </section>
+
+        <section class="panel attendance-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Attendance log</p>
+              <h2>Recent check-ins</h2>
+            </div>
+          </div>
+          <div id="attendanceList" class="attendance-list"><p class="muted">No attendance recorded yet.</p></div>
+        </section>
+      </section>
+    </main>
+    <canvas id="canvas" hidden></canvas>
+    <script src="app.js"></script>
+  </body>
+</html>

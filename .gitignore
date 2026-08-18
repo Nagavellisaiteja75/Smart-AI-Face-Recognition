@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+data/attendance.csv
+data/faces/*
+!data/faces/.gitkeep
+.vscode/
